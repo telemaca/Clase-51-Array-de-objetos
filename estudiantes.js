@@ -33,7 +33,7 @@ const estudiantesConPromedioMayorA = (x, estudiantes) => {
     return estudiantes.filter(conPromedioMayorA)
 }
 
-console.log(estudiantesConPromedioMayorA(6, estudiantes))
+// console.log(estudiantesConPromedioMayorA(6, estudiantes))
 
 // mejoresEstudiantesPorCasa, que tome por parámetro el nombre de una casa y un array de estudiantes y devuelva les estudiantes de dicha casa cuyo promedio total es mayor a 6
 const mejoresEstudiantesPorCasa = (casa, estudiantes) => {
@@ -42,7 +42,7 @@ const mejoresEstudiantesPorCasa = (casa, estudiantes) => {
     return estudiantes.filter(porCasa).filter(porPromedio)
 }
 
-console.log(mejoresEstudiantesPorCasa("Ravenclaw", estudiantes))
+// console.log(mejoresEstudiantesPorCasa("Ravenclaw", estudiantes))
 
 // // casaConMejoresEstudiantes, que tome por parámetro un array de estudiantes y devuelva el nombre de la casa que tiene más cantidad de estudiantes con promedio total mayor a 6 (usar la función anterior)
 // const casaConMejoresEstudiantes = estudiantes => {
@@ -67,6 +67,7 @@ const estudiantesPorMateriaAprobada = (materiaAChequear, estudiantes) => {
     return estudiantes.filter(porMateriaAprobada)
 }
 
+// console.log(estudiantesPorMateriaAprobada("Pociones", estudiantes))
 
 // obtenerInfoResumida, que tome por parámetro un array de estudiantes y devuelva un array con objetos, habiendo un objeto por estudiante, donde cada objeto tiene las siguientes propiedades: nombre, casa, promedio, amigues (cantidad)
 
@@ -82,10 +83,7 @@ const obtenerInfoResumida = estudiantes => {
     return estudiantes.map(obtenerInfoEspecifica)
 }
 
-console.log(obtenerInfoResumida(estudiantes))
-
 // cantidadDeEstudiantesPorCasa, que tome por parámetro un array de estudiantes y devuelva un objeto con los nombres de las casas como propiedades y la cantidad de estudiantes por casa (no debe contar amigues)
-
 const cantidadDeEstudiantesPorCasa = estudiantes => {
     const contarEstudiantes = (datosParciales, estudiante) => {
         datosParciales[estudiante.casa] = datosParciales[estudiante.casa] + 1 || 1
@@ -94,28 +92,54 @@ const cantidadDeEstudiantesPorCasa = estudiantes => {
     return estudiantes.reduce(contarEstudiantes, {})
 }
 
-console.log(cantidadDeEstudiantesPorCasa(estudiantes))
+// console.log(cantidadDeEstudiantesPorCasa(estudiantes))
 
 // cantidadDeEstudiantesPorMateriaAprobada, que tome por parámetro un array de estudiantes y devuelva un objeto con los nombres de las materias como propiedades y la cantidad de estudiantes que aprobaron dicha materia (promedio superior a 6)
 
-const cantidadDeEstudiantesPorMateriaAprobada = estudiantes => {
-    const materias = estudiante => estudiante.materias
+// const cantidadDeEstudiantesPorMateriaAprobada = estudiantes => {
+//     const materias = estudiante => estudiante.materias
+    
+//     // const tieneMateria = materia => {
+//     //     if (materia.promedio > 6) {
+//     //         materiasAprobadas.materia
+//     //     }
+//     //     return materiasAprobadas
 
-    const tieneMateria = materia => materia.nombre === materiaAChequear && materia.promedio > 6
-    const porMateriaAprobada = estudiante => {
-        const resultado = estudiante.materias.filter(tieneMateria)
-        return resultado.length !== 0
-    } 
-    return estudiantes.filter(porMateriaAprobada)
-    // const contarEstudiantesMateriaAprobada = (datosParciales, materia) => {
-    //     if (materia.promedio > 6) {
-    //         datosParciales[materia.nombre] = datosParciales[materia.nombre] + 1 || 1
-    //     }
-    //     return datosParciales
-    // }
+//     // }
+//     // const porMateriaAprobada = estudiante => {
+//     //     const resultado = estudiante.materias.map(tieneMateria)
+//     //     return resultado.length !== 0
+//     // } 
+//     return estudiantes.map(materias).map(materiaAprobada)
+//     // const contarEstudiantesMateriaAprobada = (datosParciales, materia) => {
+//     //     if (materia.promedio > 6) {
+//     //         datosParciales[materia.nombre] = datosParciales[materia.nombre] + 1 || 1
+//     //     }
+//     //     return datosParciales
+//     // }
 
-    return estudiantes.map(materias)
-    // .reduce(contarEstudiantesMateriaAprobada, {})
-}
+//     // return estudiantes.map(materias)
+//     // .reduce(contarEstudiantesMateriaAprobada, {})
+// }
 
-console.log(cantidadDeEstudiantesPorMateriaAprobada(estudiantes))
+// console.log(cantidadDeEstudiantesPorMateriaAprobada(estudiantes))
+
+// // promedioPorMateria, que tome por parámetro un array de estudiantes y devuelva un objeto con los nombres de las materias como propiedades y el promedio total de dicha materia entre todes les estudiantes (suma de todos los promedios divido la cantidad de estudiantes)
+
+// // familiarPreferido, que tome por parámetro un array de estudiantes y devuelva el familiar que más estudiantes tienen
+
+// const familiarPreferido = estudiantes => {
+//     const contarFamiliares = (datosParciales, estudiante) => {
+//         datosParciales[estudiante.familiar] = datosParciales[estudiante.familiar] + 1 || 1
+//         return datosParciales
+//     }
+
+//     // const obtenerFamiliarPreferido = familiares => {
+//     //     const numeroMayor = familiares[familiar]
+//     // }
+
+//     return estudiantes.reduce(contarFamiliares, {})
+//     // .filter(obtenerFamiliarPreferido)
+// }
+
+// console.log(familiarPreferido(estudiantes))
