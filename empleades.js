@@ -62,10 +62,30 @@ const empleadesQueSabenLenguaje = (lenguajeAChequear, empleades) => {
 }
 
 // empleadesQueSabenLenguajes, que tome por parámetro un array de lenguajes y devuelva un array con aquelles empleades que sepan todos esos lenguajes
+// const empleadesQueSabenLenguajes = (lenguajesAChequear, empleades) => {
+//     const lenguajesQueSabe = lenguaje => lenguajesAChequear.includes(lenguaje)
+//     const porLenguajes = empleade => empleade.lenguajes.every(lenguajesQueSabe)
+//     return empleades.filter(porLenguajes)
+// }
+// console.log(empleadesQueSabenLenguajes(["Ruby", "Java"], empleades))
 
 // empleadesQueSabenAlgunosLenguajes, que tome por parámetro un array de lenguajes y devuelva un array con aquelles empleades que sepan al menos uno de esos lenguajes
+const empleadesQueSabenAlgunosLenguajes = (lenguajesAChequear, empleades) => {
+    const porLenguajes = empleade => {
+        for (const lenguaje of lenguajesAChequear) {
+            return empleade.lenguajes.includes(lenguaje)
+        }
+    }
+    return empleades.filter(porLenguajes)
+}
+console.log(empleadesQueSabenAlgunosLenguajes(["PHP", "Java"], empleades))
 
 // empleadesConMejorSueldo, que devuelva un array con los 10 mejores empleades pagos (investigar metodo sort)
+const empleadesConMejorSueldo = empleades => {
+    const porMayoresSueldos = (a, b) => b.sueldo - a.sueldo
+    return empleades.sort(porMayoresSueldos).slice(0, 10)
+}
+// console.log(empleadesConMejorSueldo(empleades))
 
 // obtenerTitulosCompletos, que devuelva un array donde cada elemento es un string con la forma "nombre, puesto seniority, area", p.ej.: "Nadia Conrad, Senior Backend Developer, Desarrollo", habiendo un elemento por cada empleade (usar map)
 const obtenerTitulosCompletos = empleades => {
@@ -95,16 +115,14 @@ const obtenerInfoPersonal = empleades => {
 // seniority habiendo un elemento por cada empleade, y donde cada propiedad se corresponde a la propiedad del objeto original (usar map)
 const obtenerInfoPuestos = empleades => {
     const infoPuestos = empleade => {
-        const infoEspecifica = {}
-        infoEspecifica.nombre = empleade.nombre
-        infoEspecifica.area = empleade.area
-        infoEspecifica.puesto = empleade.puesto
-        infoEspecifica.seniority = empleade.seniority
-        return infoEspecifica
+        return { nombre: empleade.nombre,
+        area: empleade.area,
+        puesto: empleade.puesto,
+        seniority: empleade.seniority }
     }
     return empleades.map(infoPuestos)
 }
-
+console.log(obtenerInfoPuestos(empleades))
 
 // obtenerInfoSeniority, que devuelva un array donde cada elemento es un objeto con las propiedades
 // nombre
@@ -113,12 +131,11 @@ const obtenerInfoPuestos = empleades => {
 // cantidadLenguajes habiendo un elemento por cada empleade, y donde cada propiedad se corresponde a la propiedad del objeto original, eecepto cantidadLenguajes, que es un número indicando la cantidad de lenguajes que sabe (usar map)
 const obtenerInfoSeniority = empleades => {
     const infoSeniority = empleade => {
-        const infoEspecifica = {}
-        infoEspecifica.nombre = empleade.nombre
-        infoEspecifica.seniority = empleade.seniority
-        infoEspecifica.sueldo = empleade.sueldo
-        infoEspecifica.lenguajes = empleade.lenguajes.length
-        return infoEspecifica
+        return {
+        nombre: empleade.nombre,
+        seniority: empleade.seniority,
+        sueldo: empleade.sueldo,
+        lenguajes: empleade.lenguajes.length }
     }
     return empleades.map(infoSeniority)
 }
@@ -193,7 +210,7 @@ const subirDeCategoria = empleade => {
             return empleade
    }
 }
-console.log(subirDeCategoria(empleades[0]))
+// console.log(subirDeCategoria(empleades[0]))
 
 // agregarTecnologias, que agregue a todos los objetos empleades la propiedad tecnologías,que es un array conteniendo los valores "GIT" y "Node.js"
 

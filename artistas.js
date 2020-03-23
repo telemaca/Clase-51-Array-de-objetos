@@ -50,6 +50,54 @@ const artistasConDiscoEnAnio = (anio, artistas) => {
 
 // artistaConMasEntradasVendidas, que tome por parámetro un array de artistas y devuelva el objeto artista que vendió más entradas en su último recital
 
-// artistaConMayorRecaudacion, que tome por parámetro un array de artistas y devuelva el objeto artista que más recaudó en su último recital (entradasVendidas * costoEntradas)
+const artistaConMasEntradasVendidas = artistas => {
+    const deMasAMenosEntradas = (a, b) => b.ultimoRecital.entradasVendidas - a.ultimoRecital.entradasVendidas
+    return artistas.sort(deMasAMenosEntradas)[0]
+}
+// console.log(artistaConMasEntradasVendidas(artistas))
+
+// artistaConMayorRecaudacion, que tome por parámetro un array de artistas y devuelva el objeto artista que más recaudó en su último recital (entradasVendidas * costoEntradas)  
+
+const artistaConMayorRecaudacion = artistas => {
+    const aMayorRecaudacion = (a, b) => b.ultimoRecital.entradasVendidas * b.ultimoRecital.costoEntradas - a.ultimoRecital.entradasVendidas * a.ultimoRecital.costoEntradas
+    return artistas.sort(aMayorRecaudacion)[0]
+}
+
+// console.log(artistaConMayorRecaudacion(artistas))
 
 // artistaConMasCopias, que devuelva el objeto artista que más copias de discos en total vendió
+
+const artistaConMasCopias = artistas => {
+    const aCantidadDeCopias = (discosTotal, disco) => {
+        let variable = discosTotal.copiasVendidas
+        variable += disco.copiasVendidas
+        return variable
+    }
+    
+    const porMasCopiasVendidas = (masCopiasArtista, artista) => {
+        const artistaConMasVentas = masCopiasArtista.discos.reduce(aCantidadDeCopias, {})
+        const artistaVentas = artista.discos.reduce(aCantidadDeCopias)
+    }
+    return artistas.reduce(porMasCopiasVendidas)
+}
+
+console.log(artistaConMasCopias(artistas))
+
+
+
+
+
+
+
+  // const aCantidadDeCopias = (acumulador, actual) => {
+        
+    //     acumulador.copiasVendidas += actual.copiasVendidas
+    //     return acumulador
+    // } 
+    // const porMasCopiasVendidas = (masCopiasArtista, artista) => {
+    //     const artistaConMasVentas = masCopiasArtista.discos.reduce(aCantidadDeCopias)
+    //     const artistaVentas = artista.discos.reduce(aCantidadDeCopias)
+    //     return artistaConMasVentas.copiasVendidas > artistaVentas ? artistaConMasVentas : artistaVentas
+
+    // }
+    // const aPersonaConMasDinero = (personaConMasDinero, persona) => persona.dinero > personaConMasDinero ? persona : personaConMasDinero 

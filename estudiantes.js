@@ -33,7 +33,6 @@ const estudiantesConPromedioMayorA = (x, estudiantes) => {
     return estudiantes.filter(conPromedioMayorA)
 }
 
-// console.log(estudiantesConPromedioMayorA(6, estudiantes))
 
 // mejoresEstudiantesPorCasa, que tome por parámetro el nombre de una casa y un array de estudiantes y devuelva les estudiantes de dicha casa cuyo promedio total es mayor a 6
 const mejoresEstudiantesPorCasa = (casa, estudiantes) => {
@@ -46,14 +45,18 @@ const mejoresEstudiantesPorCasa = (casa, estudiantes) => {
 
 // // casaConMejoresEstudiantes, que tome por parámetro un array de estudiantes y devuelva el nombre de la casa que tiene más cantidad de estudiantes con promedio total mayor a 6 (usar la función anterior)
 // const casaConMejoresEstudiantes = estudiantes => {
-//     const mejoresEstudiantes = estudiantesConPromedioMayorA(6, estudiantes)
-//     // const ravenclaw = mejoresEstudiantesPorCasa("Ravenclaw", estudiantes)
-//     // const gryffindor = mejoresEstudiantesPorCasa("Gryffindor", estudiantes)
-//     // const slytherin = mejoresEstudiantesPorCasa("Slytherin", estudiantes)
-//     // const hufflepuff = mejoresEstudiantesPorCasa("Hufflepuff", estudiantes)
-//     // const porNombreDeCasa = (mejorEstudiante) => mejorEstudiante.casa
-
-//     return mejoresEstudiantes.sort(mejoresEstudiantes.casa)
+//     const ravenclawCantidad = mejoresEstudiantesPorCasa("Ravenclaw", estudiantes)
+//     const gryffindorCantidad = mejoresEstudiantesPorCasa("Gryffindor", estudiantes)
+//     const slytherinCantidad = mejoresEstudiantesPorCasa("Slytherin", estudiantes)
+//     const hufflepuffCantidad = mejoresEstudiantesPorCasa("Hufflepuff", estudiantes)
+//     // const mejoresEstudiantesPorCasa = {
+//     //     ravenclaw: ravenclawCantidad,
+//     //     gryffindor: gryffindorCantidad,
+//     //     slytherin: slytherinCantidad.lengt,
+//     //     hufflepuff: hufflepuffCantidad
+//     // }
+    
+//     return mejoresEstudiantesPorCasa
 // }
 // console.log(casaConMejoresEstudiantes(estudiantes))
 
@@ -67,7 +70,6 @@ const estudiantesPorMateriaAprobada = (materiaAChequear, estudiantes) => {
     return estudiantes.filter(porMateriaAprobada)
 }
 
-// console.log(estudiantesPorMateriaAprobada("Pociones", estudiantes))
 
 // obtenerInfoResumida, que tome por parámetro un array de estudiantes y devuelva un array con objetos, habiendo un objeto por estudiante, donde cada objeto tiene las siguientes propiedades: nombre, casa, promedio, amigues (cantidad)
 
@@ -92,35 +94,26 @@ const cantidadDeEstudiantesPorCasa = estudiantes => {
     return estudiantes.reduce(contarEstudiantes, {})
 }
 
-// console.log(cantidadDeEstudiantesPorCasa(estudiantes))
-
 // cantidadDeEstudiantesPorMateriaAprobada, que tome por parámetro un array de estudiantes y devuelva un objeto con los nombres de las materias como propiedades y la cantidad de estudiantes que aprobaron dicha materia (promedio superior a 6)
+const cantidadDeEstudiantesPorMateriaAprobada = estudiantes => {
+    const aNombreDeMateria = materia => materia.nombre
 
-// const cantidadDeEstudiantesPorMateriaAprobada = estudiantes => {
-//     const materias = estudiante => estudiante.materias
-    
-//     // const tieneMateria = materia => {
-//     //     if (materia.promedio > 6) {
-//     //         materiasAprobadas.materia
-//     //     }
-//     //     return materiasAprobadas
+    const materiaAprobada = materia => materia.promedio > 6
 
-//     // }
-//     // const porMateriaAprobada = estudiante => {
-//     //     const resultado = estudiante.materias.map(tieneMateria)
-//     //     return resultado.length !== 0
-//     // } 
-//     return estudiantes.map(materias).map(materiaAprobada)
-//     // const contarEstudiantesMateriaAprobada = (datosParciales, materia) => {
-//     //     if (materia.promedio > 6) {
-//     //         datosParciales[materia.nombre] = datosParciales[materia.nombre] + 1 || 1
-//     //     }
-//     //     return datosParciales
-//     // }
+    const aMateriasAprobadas = (resultadoParcial, materia) => { // * string del nombre
+        resultadoParcial[materia] = resultadoParcial[materia] + 1 || 1
+        return resultadoParcial
+    }
 
-//     // return estudiantes.map(materias)
-//     // .reduce(contarEstudiantesMateriaAprobada, {})
-// }
+    const aprobadesPorMateria = (totalGeneralParcial, estudiante) =>
+        estudiante.materias           // obtenemos el array de materias
+            .filter(materiaAprobada)    // filtramos las materias aprobadas
+            .map(aNombreDeMateria)      // nos quedamos con un array con los 
+            // nombres de las materias
+            .reduce(aMateriasAprobadas, totalGeneralParcial)
+
+    return estudiantes.reduce(aprobadesPorMateria, {}) 
+}
 
 // console.log(cantidadDeEstudiantesPorMateriaAprobada(estudiantes))
 
